@@ -8,12 +8,13 @@ import numpy as np
 import glob
 import os
 import cv2
-from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 import pickle
 import time
 from sklearn.metrics import confusion_matrix
+from sklearn.decomposition import PCA
 
 """
 Creating object for Standard Scaler
@@ -61,10 +62,19 @@ id_to_label_dict = {v: k for k, v in label_to_id_dict.items()}
 label_ids_test = np.array([label_to_id_dict[x] for x in labels_test])
 
 """
-    Naive Bayes Classifier
+PCA 
+"""
+pca = PCA(0.95)
+pca.fit(fruit_training)
+fruit_training = pca.transform(fruit_training)
+fruit_test = pca.transform(fruit_test)
+
+"""
+Softmax Classifier
 """
 start_time = time.time()
-classifier = GaussianNB()
+classifier = SGDClassifier(max_iter = 1000,
+                           tol = 1e-1);
 classifier = classifier.fit(fruit_training, label_ids_training)
 print("--- %s seconds ---" % (time.time() - start_time))
 
@@ -73,7 +83,7 @@ Prediction
 """
 y_pred = classifier.predict(fruit_test)
 precision = accuracy_score(y_pred, label_ids_test) * 100
-print("Accuracy with Naive Bayes: {0:.6f}".format(precision))
+print("Accuracy with Softmax: {0:.6f}".format(precision))
 
 """
 Confusion Matrix

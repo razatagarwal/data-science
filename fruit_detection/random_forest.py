@@ -10,7 +10,6 @@ import os
 import cv2
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-from sklearn.manifold import TSNE
 from sklearn.preprocessing import StandardScaler
 import pickle
 import time

@@ -8,12 +8,13 @@ import numpy as np
 import glob
 import os
 import cv2
-from sklearn.naive_bayes import GaussianNB
+from sklearn import svm
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 import pickle
 import time
 from sklearn.metrics import confusion_matrix
+from sklearn.decomposition import PCA
 
 """
 Creating object for Standard Scaler
@@ -25,7 +26,7 @@ Loading and preprocessing the training dataset
 """
 fruit_training = []
 labels_training = []
-for fruit_dir_path in glob.glob("fruits-360/Training/*"):
+for fruit_dir_path in glob.glob("fruits-360/Training_large/*"):
     fruit_label = fruit_dir_path.split("/")[-1]
     for image_path in glob.glob(os.path.join(fruit_dir_path, "*.jpg")):
         image = cv2.imread(image_path, cv2.IMREAD_COLOR)
@@ -45,7 +46,7 @@ Loading and preprocessing the test dataset
 """
 fruit_test = []
 labels_test = []
-for fruit_dir_path in glob.glob("fruits-360/Test/*"):
+for fruit_dir_path in glob.glob("fruits-360/Test_large/*"):
     fruit_label = fruit_dir_path.split("/")[-1]
     for image_path in glob.glob(os.path.join(fruit_dir_path, "*.jpg")):
         image = cv2.imread(image_path, cv2.IMREAD_COLOR)
@@ -61,10 +62,20 @@ id_to_label_dict = {v: k for k, v in label_to_id_dict.items()}
 label_ids_test = np.array([label_to_id_dict[x] for x in labels_test])
 
 """
-    Naive Bayes Classifier
+PCA 
+"""
+pca = PCA(0.95)
+pca.fit(fruit_training)
+fruit_training = pca.transform(fruit_training)
+fruit_test = pca.transform(fruit_test)
+
+"""
+SVM Classifier
 """
 start_time = time.time()
-classifier = GaussianNB()
+classifier = svm.SVC(C = 7,
+                     kernel = "rbf",
+                     gamma = 0.0006)
 classifier = classifier.fit(fruit_training, label_ids_training)
 print("--- %s seconds ---" % (time.time() - start_time))
 
@@ -73,7 +84,7 @@ Prediction
 """
 y_pred = classifier.predict(fruit_test)
 precision = accuracy_score(y_pred, label_ids_test) * 100
-print("Accuracy with Naive Bayes: {0:.6f}".format(precision))
+print("Accuracy with SVM: {0:.6f}".format(precision))
 
 """
 Confusion Matrix

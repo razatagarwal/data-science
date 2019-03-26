@@ -19,6 +19,8 @@ from sklearn.preprocessing import StandardScaler
 import pickle
 import time
 from sklearn.metrics import confusion_matrix
+from sklearn.decomposition import PCA
+from sklearn.model_selection import cross_val_score
 
 """
 Creating object for Standard Scaler
@@ -66,12 +68,16 @@ id_to_label_dict = {v: k for k, v in label_to_id_dict.items()}
 label_ids_test = np.array([label_to_id_dict[x] for x in labels_test])
 
 """
+PCA 
+"""
+pca = PCA(0.95)
+pca.fit(fruit_training)
+fruit_training = pca.transform(fruit_training)
+fruit_test = pca.transform(fruit_test)
+
+"""
 SVM Classifier
 """
-#kernel = ["rbf", "linear", "poly", "sigmoid"]
-#gamma = [0.00051, 0.00052, 0.00053, 0.00054, 0.00055, 0.00056, 0.00057, 0.00058, 0.00059, 0.0006]
-#for i in range(0, 10) :
-    #print(gamma[i])
 start_time = time.time()
 classifier = svm.SVC(C = 7,
                      kernel = "rbf",
