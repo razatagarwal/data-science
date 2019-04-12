@@ -13,7 +13,9 @@ from sklearn.tree import DecisionTreeRegressor
 regressor = DecisionTreeRegressor(random_state = 0)
 regressor.fit(x, y)
 
-y_pred = regressor.predict(6.5)
+y_pred = regressor.predict(np.array([[6.5]]))
+
+print("For position 6.5, Salary = " , y_pred)
 
 x_grid = np.arange(min(x), max(x), 0.01)
 x_grid = x_grid.reshape((len(x_grid), 1))
