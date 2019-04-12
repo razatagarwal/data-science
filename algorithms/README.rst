@@ -1,5 +1,5 @@
 #####################
-Alogorithms Directory
+Algorithms Directory
 #####################
 
 
