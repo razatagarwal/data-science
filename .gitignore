@@ -60,5 +60,5 @@ e-*
 *eclipse_workspace/.metadata
 fruit_detection/fruits-360
 *.sav
-*/ipynb_checkpoints
+*ipynb_checkpoints
 
