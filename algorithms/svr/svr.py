@@ -20,8 +20,9 @@ from sklearn.svm import SVR
 regressor = SVR(kernel = 'rbf')
 regressor.fit(x, y)
 
-y_pred = regressor.predict(6.5)
+y_pred = regressor.predict(np.array([[6.5]]))
 y_pred = sc_y.inverse_transform(y_pred)
+print(y_pred)
 
 plt.scatter(x, y, color = 'red')
 plt.plot(x, regressor.predict(x), color = 'blue')
