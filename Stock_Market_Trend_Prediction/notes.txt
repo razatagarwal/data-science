@@ -1,0 +1,68 @@
+Link : https://escholarship.org/uc/item/0cp1x8th
+
+Moving Average 10
+	Average of all the closing prices for the last 10 days.
+	Link : https://www.investopedia.com/terms/m/movingaverage.asp
+
+Moving Average 50
+	Average of all the closing prices for the last 50 days.
+	Link : https://www.investopedia.com/terms/m/movingaverage.asp
+
+Relative Strength Index
+	14 period RSI, momentum oscillator(1-100)
+	calculate percent change from (close - open)/open * 100
+	seperate out gain and loss 
+	calculate avg gain and avg loss from 15th day
+	First average Gain = Sum of Gains over the past 14 periods/14
+	First average Loss = Sum of Losses over the past 14 periods/14
+	Average Gain = [(previous Average Gain) * 13 + current Gain]/14
+	Average Loss = [(previous Average Loss) * 13 + current Loss]/14
+	RS = Average Gain / Average Loss
+	RSI = 100 - (100 / (1 + RS))
+	Link : https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi
+
+Rate of Change 1
+	ROC = {(current closing price / yesterday's closing price) - 1} * 100
+	Link : https://www.investopedia.com/terms/r/rateofchange.asp
+
+Rate of Change 2
+	ROC2 = {(current closing price / day before yesterday's closing price) - 1} * 100
+	Link : https://www.investopedia.com/terms/r/rateofchange.asp
+
+Volatility 10
+	Standard Deviation of the daily percent change for the last 10 days (including the current day)
+	Link : https://www.fool.com/knowledge-center/how-to-calculate-annualized-volatility.aspx
+
+Disparity Index 10
+	DI10 = (current closing price - MA10) / MA10 * 100
+	Link : https://www.investopedia.com/terms/d/disparityindex.asp
+
+Disparity Index 5
+	DI5 = (current closing price - MA5) / MA5 * 100
+	Link : https://www.investopedia.com/terms/d/disparityindex.asp
+
+Stochastic Oscillator
+	%K = ((C - L14) / (H14 - L14)) * 100
+	C = the current closing price
+	L14 = the lowest price traded of the 14 previous trading sessions
+	H14 = the highest price traded during the same 14 day period
+	%K = the current value of stochastic indicator
+	Link : https://www.investopedia.com/terms/s/stochasticoscillator.asp
+
+Williams % R
+	Williams % R = ((H14 - C) / (H14 - L14))
+	H14 = The highest price traded during the 14 previous trading sessions
+	L14 = The lowest price traded during the same 14 day period
+	C = current closing price
+	Link : https://www.investopedia.com/terms/w/williamsr.asp
+
+Volume Price trend
+	PVT = [((CurrentClose - PreviousClose) / PreviousClose) x Volume] + PreviousPVT
+	Link : https://www.tradingview.com/wiki/Price_Volume_Trend_(PVT)
+
+Channel Commodity Index
+	CCI = (Typical Price - Moving Average) / (0.015 * Mean Deviation)
+	Typical Price = (High + Low + Close) / 3 for each period
+	Moving Average(MATP20) = Average of the typical prices for the last 20 days
+	Mean Deviation = (Typical Price - MATP20) / 20
+	Link : https://www.investopedia.com/terms/c/commoditychannelindex.asp
